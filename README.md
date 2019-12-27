@@ -3,7 +3,7 @@
 
 # Application to power system
 This demo shows how to design the appropriate parameters for the power
-systems in the submitted manuscript named: 
+systems in the submitted manuscript entiled: 
 'Distributed event-triggered predictive control for a class of nonlinear
 interconnected systems'
 
