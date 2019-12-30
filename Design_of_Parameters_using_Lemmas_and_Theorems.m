@@ -24,7 +24,7 @@ clear
 % Parameters for the 2-machine power system
 omg0 = 50;      %steady state frequency
 Nm   = 2;           %# of machines
-tour = 0.1;
+
 
 H = [5   4];
 D = [1      1.5];
@@ -44,14 +44,14 @@ A1 = [0 -1 0; 0 -D(1)/2/H(1) omg0/2/H(1);  0 0 -1/T(1)];
 B1 = [0;0;1/T(1)];
 % dlt12 = x1(1) + 51 - x2(1) - 51.5;
 % Pe1 = 0.5*0.8/10*(sin(x1(2) - x2(2)) - sin(dlt12));
-% d1 = 0; % disturbence
+% d1 = 4*10^(-4);     % disturbence
 
 % The second maching
 A2 = [0 -1 0; 0 -D(2)/2/H(2) omg0/2/H(2);  0 0 -1/T(2)];
 B2 = [0;0;1/T(2)];
 % dlt12 = x1(1) + 51 - x2(1) - 51.5;
 % Pe1 = 0.5*0.8/10*(sin(x1(2) - x2(2)) - sin(dlt12));
-% d2 = 0; % disturbence
+% d2 = 1*10^(-4);  % disturbence
 
 % Obtain the kappa1 kappa2
 kappa1 = omg0*E(1)*E(2)/X/H(1)
