@@ -101,7 +101,7 @@ Epsilon1 = 0.03;
 Epsilon2 = 0.03;
 
 % Obtains the bounds of the prediction horizon T
-% First, using Eq.(16)
+% First, using Eq.(14)
 T1min  = -2*min(eig(P1))/max(eig(bar_Q1))/Beta1*log(Alpha1);
 T2min  = -2*min(eig(P2))/max(eig(bar_Q2))/Beta2*log(Alpha2);
 Tmin = max(T1min, T2min)
@@ -115,7 +115,7 @@ left192 = exp(max(real(eig(Ad2)))*Beta2*T)*Beta2^2*T;
 right192 = Alpha2/kappa2;
 if ~isempty(left191) && ~isempty(right191) && ~isempty(left192) && ~isempty(right192)
     if left191 <= right191 && left192 <= right192
-    disp(['The conidtion Eq.(16) and Eq. (19) is satisfied.' ]);
+    disp(['The conidtion Eq.(14) and Eq. (17) is satisfied.' ]);
     else
         disp(['Choose the prediction horizon T with T >=' num2str(Tmin)]);
     end
@@ -126,7 +126,7 @@ end
 
 
 
-% Design q using Eq.(20)
+% Design q using Eq.(18)
 q_right201 = Alpha1/(1-Beta1)-1;
 q_right202 = Alpha2/(1-Beta2)-1;
 q_min = max(q_right201, q_right202);
@@ -134,14 +134,14 @@ q_min = max(q_right201, q_right202);
 q = 3
 if ~isempty(q_min) && ~isempty(q)
     if q <= q_min
-    disp(['The conidtion Eq.(20) is satisfied.' ]);
+    disp(['The conidtion Eq.(18) is satisfied.' ]);
     else
         disp(['Choose the q with q >=' num2str(q_min)]);
     end
 end
 
 
-% Design rho1 and rho2 using Eq.(8) and Eq.(17)
+% Design rho1 and rho2 using Eq.(8) and Eq.(15)
 % For rho1, 
 Eta1 = max(eig(A1)) + kappa1*Nm;
 rho1max = (q+1 - Alpha1)/max(sqrt(eig(P1)))/(q+1)/Beta1/T *  Epsilon1*...
@@ -151,7 +151,7 @@ rho1max = (q+1 - Alpha1)/max(sqrt(eig(P1)))/(q+1)/Beta1/T *  Epsilon1*...
 rho1 = 0.0004
 if ~isempty(rho1max) && ~isempty(rho1)
     if rho1 <= rho1max
-    disp(['The conidtion Eq.(17) is satisfied.' ]);
+    disp(['The conidtion Eq.(15) is satisfied.' ]);
     else
         disp(['Choose the rho1 with rho1 <=' num2str(rho1max)]);
     end
@@ -166,7 +166,7 @@ rho2max = (q+1 - Alpha2)/max(sqrt(eig(P2)))/(q+1)/Beta2/T *  Epsilon2*...
 rho2 = 0.0001
 if ~isempty(rho2max) && ~isempty(rho2)
     if rho2 <= rho2max
-    disp(['The conidtion Eq.(17) is satisfied.' ]);
+    disp(['The conidtion Eq.(15) is satisfied.' ]);
     else
         disp(['Choose the rho2 with rho2 <=' num2str(rho2max)]);
     end
@@ -174,7 +174,7 @@ end
 
 
 
-% Check the stability condition using Eq.(22)
+% Check the stability condition using Eq.(20)
 Sigma1 = (1+Alpha1)* Epsilon1/(q+1)*kappa1*Nm + rho1*max(eig(P1));
 Sigma2 = (1+Alpha2)* Epsilon2/(q+1)*kappa2*Nm + rho2*max(eig(P2));
 bar_sigma1 = Beta1*Sigma1*T*exp(Eta1*Beta1*T);
@@ -187,7 +187,7 @@ right221 = w231*(TEMP1* TEMP2 + 2*bar_sigma1*Alpha1*Epsilon1*(1-Beta1)/(q+1)/Bet
 
 if ~isempty(left221) && ~isempty(right221)
     if left221 <= right221
-    disp(['The stability conidtion Eq.(22) is satisfied.' ]);
+    disp(['The stability conidtion Eq.(20) is satisfied.' ]);
     else
         disp(['Choose the parameters again, like T, Q, rho1, and rho2']);
     end
